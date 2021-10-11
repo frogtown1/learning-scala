@@ -6,19 +6,19 @@ class Trie[T]() {
              val children: collection.mutable.Map[Char, Node] = collection.mutable.Map())
   val root = new Node(None)
   def add(s: String, v: T) = {
-    var current = root
+    var current          = root
     for (c <- s) current = current.children.getOrElseUpdate(c, new Node(None))
-    current.value = Some(v)
+    current.value        = Some(v)
   }
   def contains(s: String): Boolean = get(s).isDefined
-  def get(s: String): Option[T] = {
+  def get(s: String): Option[T]    = {
     var current = Option(root)
     for (c <- s if current.nonEmpty) current = current.get.children.get(c)
     current.flatMap(_.value)
   }
   def prefixesMatchingString0(s: String): Map[Int, T] = {
     var current = Option(root)
-    val output = Map.newBuilder[Int, T]
+    val output  = Map.newBuilder[Int, T]
     for ((c, i) <- s.zipWithIndex if current.nonEmpty) {
       for (v <- current.get.value) output += (i -> v)
       current = current.get.children.get(c)
@@ -39,7 +39,7 @@ class Trie[T]() {
         for (v <- current.value) output += (s + path.reverse.mkString -> v)
         for ((c, n) <- current.children) recurse(n, c :: path)
       }
-      recurse(current.get, Nil) // recursive walk
+      recurse(current.get, Nil)
       output.result()
     }
   }
