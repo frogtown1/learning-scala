@@ -3,7 +3,7 @@
 def depthFirstSearch[T](start: T, graph: Map[T, Seq[T]]): Map[T, List[T]] = {
   val seen        = collection.mutable.Map(start -> List(start))
   val pathLengths = collection.mutable.Map(start -> 0)
-  val queue = collection.mutable.ArrayDeque((start, List(start), 0))
+  val queue       = collection.mutable.ArrayDeque((start, List(start), 0))
   while (queue.nonEmpty) {
     val (current, path, pathLength) = queue.removeLast()
     for {
