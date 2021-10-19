@@ -31,7 +31,7 @@ class Trie[T]() {
   }
   def stringsMatchingPrefix(s: String): Map[String, T] = {
     var current = Option(root)
-    for (c <- s if current.nonEmpty) current = current.get.children.get(c) // initial walk
+    for (c <- s if current.nonEmpty) current = current.get.children.get(c)
     if (current.isEmpty) Map()
     else {
       val output = Map.newBuilder[String, T]
